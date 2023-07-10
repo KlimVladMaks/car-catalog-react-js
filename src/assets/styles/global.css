@@ -30,3 +30,33 @@ h1 {
     /* Внешний нижний отступ */
     margin-bottom: 20px;
 }
+
+/* Кнопка */
+.button {
+
+    /* Внутренние отступы */
+    padding: 7px;
+
+    /* Отключаем границу и контур */
+    border: none;
+    outline: none;
+
+    /* Закругление углов */
+    border-radius: 3px;
+
+    /* Цвет фона */
+    background-color: lightgray;
+
+    /* Плавный переход при изменении цвета фона */
+    transition: background-color 0.2s ease;
+
+    /* При наведении курсор превращается в указатель */
+    cursor: pointer;
+}
+
+/* Кнопка при наведении курсора */
+.button:hover {
+
+    /* Цвет фона */
+    background-color: lightblue;
+}
