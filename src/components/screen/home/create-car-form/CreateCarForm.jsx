@@ -1,21 +1,24 @@
 /* eslint-disable react/prop-types */
 
-// Импорты
-import styles from './CreateCarForm.module.css'
+// Импорты библиотек
 import { useState } from 'react'
+
+// Импорты файлов
+import styles from './CreateCarForm.module.css'
+
+// Пустой объект для данных о машине
+const clearData = {
+    id: '',
+    name: '',
+    price: '',
+    image: '',
+}
 
 // Создаём функциональный компонент для формы добавления автомобиля
 const CreateCarForm = ({setCars}) => {
 
-    // Создаём хук для отслеживания ввода имени автомобиля
-    // name - переменная, содержащая значение строки; setName - функция, позволяющая изменить значение строки
-    const [name, setName] = useState('')
-
-    // Хук для отслеживания ввода цены автомобиля
-    const [price, setPrice] = useState('')
-
-    // Хук для отслеживания ввода ссылки на изображение автомобиля
-    const [image, setImage] = useState('')
+    // Создаём хук для отслеживания состояния информации об автомобиле
+    const [data, setData] = useState(clearData)
 
     // Функция для создания карточки автомобиля
     // e - событие нажатия кнопки создания автомобиля
@@ -24,13 +27,14 @@ const CreateCarForm = ({setCars}) => {
         // Отключаем стандартное реагирование на событие нажатия кнопки
         e.preventDefault()
 
-        // Добавляем в список автомобилей все предыдущие автомобили и новый автомобиль
+        // Добавляем в список автомобилей все данные о предыдущих автомобилях и данные о новом автомобиле
         setCars(prev => [{
             id: prev.length + 1,
-            name: name,
-            price: price,
-            image: image,
+            ...data,
         }, ...prev, ])
+
+        // Очищаем поля ввода
+        setData(clearData)
     }
 
     // Возвращаем разметку компонента
@@ -42,18 +46,18 @@ const CreateCarForm = ({setCars}) => {
             {/* Поле ввода названия машины */}
             {/* При вводе текста в поле ввода, изменяем значение переменной, хранящей имя автомобиля */}
             <input placeholder="Название автомобиля" 
-                   onChange={e => setName(e.target.value)} 
-                   value={name} />
+                   onChange={e => setData({...data, name: e.target.value})} 
+                   value={data.name} />
 
             {/* Поле ввода цены машины */}
             <input placeholder="Цена автомобиля"
-                   onChange={e => setPrice(e.target.value)} 
-                   value={price} />
+                   onChange={e => setData({...data, price: e.target.value})} 
+                   value={data.price} />
 
             {/* Поле ввода изображения машины */}
             <input placeholder="Изображение автомобиля"
-                   onChange={e => setImage(e.target.value)}
-                   value={image} />
+                   onChange={e => setData({...data, image: e.target.value})}
+                   value={data.image} />
 
             {/* Кнопка добавления карточки автомобиля */}
             {/* При нажатии на кнопку, вызывается функция создания автомобиля */}

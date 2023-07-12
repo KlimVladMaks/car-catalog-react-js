@@ -1,14 +1,35 @@
-// Импорты
+// Импорты библиотек
+import { useEffect, useState } from 'react'
+
+// Импорты файлов
 import CarItem from './car-item/CarItem'
-import {cars as carsData} from './cars.data'
 import CreateCarForm from './create-car-form/CreateCarForm'
-import { useState } from 'react'
+import styles from './Home.module.css'
+import { CarService } from '../../../services/car.service'
 
 // Функциональный компонент (независимый блок) для домашней страницы
 function Home() {
 
   // Создаём хук для отслеживания изменений списка автомобилей
-  const [cars, setCars] = useState(carsData)
+  const [cars, setCars] = useState([])
+
+  // Создаём хук, вызываемый при отрисовке страницы
+  useEffect(() => {
+
+    // Создаём асинхронную функцию для получения данных об автомобилях с сервера
+    const fetchData = async () => {
+
+      // Получаем данные обо всех автомобилях с сервера
+      const data = await CarService.getAll()
+
+      // Записывает полученные данные в общий список автомобилей
+      setCars(data)
+    }
+
+    // Вызываем функцию для получения данных об автомобилях с сервера
+    fetchData()
+
+  }, [])
 
   // Возвращаем разметку компонента
   return (
@@ -35,7 +56,7 @@ function Home() {
           )
 
           // Если количество автомобилей равно нулю, то выводим сообщение о том, что машин нет
-          : (<p>Автомобилей пока нет</p>)
+          : (<p className={styles.text}>Автомобилей пока нет</p>)
         }
 
       </div>

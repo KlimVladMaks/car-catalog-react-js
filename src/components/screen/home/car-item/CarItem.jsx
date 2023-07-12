@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-// Импорты
+// Импорты файлов
 import styles from "./CarItem.module.css"
 
 // Функциональный компонент для карточки отдельной машины
