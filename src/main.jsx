@@ -5,12 +5,15 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 // Импорты файлов
-import Home from './components/screen/home/Home.jsx'
 import './assets/styles/global.css'
+import Router from './components/Router'
 
 // Запускаем функциональный компонент домашней страницы
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Home />
+
+    {/* Подключаем роутер для маршрутизации веб-приложения */}
+    <Router />
+
   </React.StrictMode>,
 )

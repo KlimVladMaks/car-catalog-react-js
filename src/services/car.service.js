@@ -14,5 +14,15 @@ export const CarService = {
 
         // Возвращаем полученные данные
         return response.data
+    },
+
+    // Функция для получения данных об автомобиле по его id
+    async getById(id) {
+
+        // Получаем ответ от сервера с данными об автомобиле с искомым id
+        const response = await axios.get(`http://localhost:3000/cars?id=${id}`)
+
+        // Возвращаем полученные данные об автомобиле
+        return response.data[0]
     }
 }
