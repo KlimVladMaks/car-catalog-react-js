@@ -1,10 +1,11 @@
 // Импорты библиотек
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 // Импорты файлов
 import { CarService } from "../../../services/car.service"
 import CarItem from "../home/car-item/CarItem"
+import styles from "./CarDetail.module.css"
 
 // Функциональный компонент со страницей отдельной машины
 const CarDetail = () => {
@@ -42,6 +43,14 @@ const CarDetail = () => {
     // Возвращаем разметку компонента
     return (
     <div>
+
+        {/* Ссылка для возврата на домашнюю страницу, работающая без перезагрузки веб-приложения */}
+        <Link to='/'>
+
+            {/* Изображение со стрелкой назад */}
+            <img src="/back-arrow.svg" alt="Back" className={styles.backArrow} />
+        
+        </Link>
 
         {/* Карточка с автомобилем */}
         <CarItem car={car}/>
