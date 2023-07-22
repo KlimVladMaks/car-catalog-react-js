@@ -34,7 +34,7 @@
 .info {
 
     /* Внутренние отступы */
-    padding: 10px;
+    padding: 10px 10px 15px 10px;
 }
 
 /* Заголовок в блоке с информацией */
@@ -48,5 +48,5 @@
 .info p {
 
     /* Внешний нижний отступ */
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }

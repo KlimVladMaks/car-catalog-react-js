@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 
+// Импорты библиотек
+import { Link } from "react-router-dom"
+
 // Импорты файлов
 import styles from "./CarItem.module.css"
 
@@ -34,8 +37,8 @@ function CarItem({car}) {
                 }).format(car.price)}
                 </p>
 
-                {/* Кнопка для перехода к подробному описанию */}
-                <button className="button">Узнать больше</button>
+                {/* Кнопка для перехода на страницу отдельной машины */}
+                <Link className="button" to={`/car/${car.id}`}>Узнать больше</Link>
 
             </div>
 
