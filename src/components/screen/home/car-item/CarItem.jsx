@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 
 // Импорты файлов
 import styles from "./CarItem.module.css"
+import Price from "./Price"
 
 // Функциональный компонент для карточки отдельной машины
 function CarItem({car}) {
@@ -28,14 +29,7 @@ function CarItem({car}) {
                 <h2>{car.name}</h2>
 
                 {/* Цена машины */}
-                {/* Форматируем цену машины для отображения денежного формата*/}
-                <p>
-                {new Intl.NumberFormat('ru-RU', {
-                    style: 'currency',
-                    currency: 'USD',
-                    maximumFractionDigits: 0,
-                }).format(car.price)}
-                </p>
+                <Price price={car.price}/>
 
                 {/* Кнопка для перехода на страницу отдельной машины */}
                 <Link className="button" to={`/car/${car.id}`}>Узнать больше</Link>
