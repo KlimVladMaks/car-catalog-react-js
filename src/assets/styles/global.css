@@ -69,3 +69,17 @@ h1 {
     /* Цвет фона */
     background-color: lightblue;
 }
+
+/* Однострочная кнопка */
+.button.one-line {
+
+    /* Максимальная высота */
+    max-height: 15px;
+}
+
+/* Кнопка удаления при наведении курсора */
+.button.del-button:hover {
+
+    /* Цвет фона */
+    background-color: lightcoral;
+}

@@ -24,5 +24,18 @@ export const CarService = {
 
         // Возвращаем полученные данные об автомобиле
         return response.data[0]
+    },
+
+    // Функция для добавления автомобиля в базу данных
+    async addNew(carData) {
+
+        // Отправляем и добавляем данные об автомобиле на сервер
+        await axios.post('http://localhost:3000/cars', carData)
+    },
+
+    //TODO
+    // Функция для удаления автомобиля из базы данных по его id
+    async delById(id) {
+        return id;
     }
 }

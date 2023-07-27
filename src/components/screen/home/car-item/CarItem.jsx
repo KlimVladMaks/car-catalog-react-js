@@ -31,8 +31,18 @@ function CarItem({car}) {
                 {/* Цена машины */}
                 <Price price={car.price}/>
 
-                {/* Кнопка для перехода на страницу отдельной машины */}
-                <Link className="button" to={`/car/${car.id}`}>Узнать больше</Link>
+                {/* Блок с кнопками карточки */}
+                <div className={styles.buttons}>
+
+                    {/* Кнопка для перехода на страницу отдельной машины */}
+                    <Link className="button one-line" to={`/car/${car.id}`}>Узнать больше</Link>
+
+                    {/* Кнопка для удаления карточки машины */}
+                    <button className='button del-button' style={{padding: '1px'}}>
+                        <img src="/waste-basket.svg" alt="Waste basket" style={{height: '30px'}} />
+                    </button>
+
+                </div>
 
             </div>
 

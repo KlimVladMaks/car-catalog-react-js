@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 // Импорты файлов
 import styles from './CreateCarForm.module.css'
+import { CarService } from '../../../../services/car.service'
 
 // Пустой объект для данных о машине
 const clearData = {
@@ -15,23 +16,30 @@ const clearData = {
 }
 
 // Создаём функциональный компонент для формы добавления автомобиля
-const CreateCarForm = ({setCars}) => {
+// eslint-disable-next-line no-unused-vars
+const CreateCarForm = ({cars, setCars}) => {
 
     // Создаём хук для отслеживания состояния информации об автомобиле
     const [data, setData] = useState(clearData)
 
     // Функция для создания карточки автомобиля
     // e - событие нажатия кнопки создания автомобиля
-    const createCar = e => {
+    const createCar = (e) => {
 
         // Отключаем стандартное реагирование на событие нажатия кнопки
         e.preventDefault()
 
         // Добавляем в список автомобилей все данные о предыдущих автомобилях и данные о новом автомобиле
-        setCars(prev => [{
-            id: prev.length + 1,
+        // setCars(prev => [{
+        //     id: prev.length + 1,
+        //     ...data,
+        // }, ...prev, ])
+
+        // Добавляем данные о новой машине на сервер
+        CarService.addNew({
+            id: cars.length + 1,
             ...data,
-        }, ...prev, ])
+        })
 
         // Очищаем поля ввода
         setData(clearData)
