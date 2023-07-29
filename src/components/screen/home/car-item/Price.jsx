@@ -3,6 +3,11 @@
 
 import React from "react"
 
+/**
+ * Функциональный компонент для отображения блока с ценой автомобиля.
+ * @param {number} price - Цена автомобиля.
+ * @returns {JSX.Element} - Блок с ценой автомобиля.
+ */
 const Price = ({price}) => {
 
     return (
@@ -13,7 +18,6 @@ const Price = ({price}) => {
             maximumFractionDigits: 0,
         }).format(price)}
         </p>
-
     )
 }
 

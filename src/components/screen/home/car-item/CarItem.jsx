@@ -4,6 +4,11 @@ import { Link } from "react-router-dom"
 import styles from "./CarItem.module.css"
 import Price from "./Price"
 
+/**
+ * Функциональный компонент для отображения карточки отдельного автомобиля.
+ * @param {Object} car - Объект с данными об автомобиле.
+ * @returns {JSX.Element} - Карточка автомобиля.
+ */
 function CarItem({car}) {
 
     return (

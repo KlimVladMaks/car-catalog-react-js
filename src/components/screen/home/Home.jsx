@@ -4,10 +4,17 @@ import CreateCarForm from './create-car-form/CreateCarForm'
 import styles from './Home.module.css'
 import { CarService } from '../../../services/car.service'
 
+/**
+ * Функциональный компонент для отображения домашней страницы с каталогом автомобилей.
+ * @returns {JSX.Element} - Домашняя страница с каталогом автомобилей.
+ */
 function Home() {
 
   const [cars, setCars] = useState([])
 
+  /**
+   * Хук для обновления массива автомобилей при монтировании компонента.
+   */
   useEffect(() => {
 
     const fetchData = async () => {
