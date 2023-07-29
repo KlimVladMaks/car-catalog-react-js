@@ -26,33 +26,9 @@
     },
     {
       "id": 5,
-      "name": "2022 Mercedes-Benz E-Class",
-      "price": 56000,
-      "image": "https://media.ed.edmunds-media.com/mercedes-benz/e-class/2021/oem/2021_mercedes-benz_e-class_sedan_amg-e-53_fq_oem_1_815.jpg"
-    },
-    {
-      "id": 6,
       "name": "1",
       "price": "1",
       "image": "1"
-    },
-    {
-      "id": 7,
-      "name": "1",
-      "price": "1",
-      "image": "1"
-    },
-    {
-      "id": 8,
-      "name": "5",
-      "price": "5",
-      "image": "5"
-    },
-    {
-      "id": 9,
-      "name": "10",
-      "price": "10",
-      "image": "10"
     }
   ]
 }

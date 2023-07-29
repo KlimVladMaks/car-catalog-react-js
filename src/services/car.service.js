@@ -35,6 +35,6 @@ export const CarService = {
 
     //TODO
     async delById(id) {
-        return id;
+        await axios.delete(`http://localhost:3000/cars/${id}`);
     }
 }

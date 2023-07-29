@@ -17,8 +17,6 @@ const clearData = {
  * @param {Function} setCars - Функция для обновления массива автомобилей.
  * @returns {JSX.Element} - Форма для добавления нового автомобиля.
  */
-// TODO
-// eslint-disable-next-line no-unused-vars
 const CreateCarForm = ({cars, setCars}) => {
 
     const [data, setData] = useState(clearData)
@@ -35,6 +33,7 @@ const CreateCarForm = ({cars, setCars}) => {
             ...data,
         })
         setData(clearData)
+        setCars([...cars, data])
     }
 
     return (

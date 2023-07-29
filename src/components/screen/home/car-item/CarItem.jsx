@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "react-router-dom"
+import Buttons from "./Buttons"
 import styles from "./CarItem.module.css"
 import Price from "./Price"
 
@@ -9,7 +9,7 @@ import Price from "./Price"
  * @param {Object} car - Объект с данными об автомобиле.
  * @returns {JSX.Element} - Карточка автомобиля.
  */
-function CarItem({car}) {
+function CarItem({car, cars, setCars}) {
 
     return (
         <div key={car.id} className={styles.item}>
@@ -20,12 +20,7 @@ function CarItem({car}) {
             <div className={styles.info}>
                 <h2>{car.name}</h2>
                 <Price price={car.price}/>
-                <div className={styles.buttons}>
-                    <Link className="button one-line" to={`/car/${car.id}`}>Узнать больше</Link>
-                    <button className='button del-button' style={{padding: '1px'}}>
-                        <img src="/waste-basket.svg" alt="Waste basket" style={{height: '30px'}} />
-                    </button>
-                </div>
+                <Buttons car={car} cars={cars} setCars={setCars}/>
             </div>
         </div>
     )

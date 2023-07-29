@@ -17,12 +17,16 @@ function Home() {
    */
   useEffect(() => {
 
+    /**
+     * Функция для получения и задания данных о всех автомобилях.
+     * @returns {void}
+     */
     const fetchData = async () => {
       const data = await CarService.getAll()
       setCars(data)
     }
 
-    fetchData()
+    fetchData();
   }, [])
 
   return (
@@ -31,7 +35,7 @@ function Home() {
       <CreateCarForm cars={cars} setCars={setCars} />
       <div>
         {cars.length ? [...cars].reverse().map(car =>
-          (<CarItem key={car.id} car={car} />)
+          (<CarItem key={car.id} car={car} cars={cars} setCars={setCars} />)
         )
           : (<p className={styles.text}>Автомобилей пока нет</p>)
         }
