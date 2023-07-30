@@ -15,10 +15,14 @@ const Buttons = ({car, cars, setCars}) => {
      * Функция для удаления автомобиля из базы данных.
      * @param {Event} e - Событие удаления автомобиля из базы данных (клик по кнопке "Удалить").
      */
-    const delCar = (e) => {
+    const delCar = async (e) => {
         e.preventDefault();
-        CarService.delById(car.id);
-        setCars(cars.filter(checkedCar => checkedCar.id !== car.id));
+        try {
+            await CarService.delById(car.id);
+            setCars(cars.filter(checkedCar => checkedCar.id !== car.id));
+        } catch (error) {
+            alert("Не получилось удалить автомобиль. Обновите страницу или попробуйте позже.");
+        }
     }
 
     return (

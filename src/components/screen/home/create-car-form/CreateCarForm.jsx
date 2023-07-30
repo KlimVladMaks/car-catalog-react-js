@@ -5,7 +5,6 @@ import styles from './CreateCarForm.module.css'
 import { CarService } from '../../../../services/car.service'
 
 const clearData = {
-    id: '',
     name: '',
     price: '',
     image: '',
@@ -26,14 +25,18 @@ const CreateCarForm = ({cars, setCars}) => {
      * @param {Event} e - Событие создания нового автомобиля (клик по кнопке "Добавить").
      * @returns {void}
      */
-    const createCar = (e) => {
+    const createCar = async (e) => {
         e.preventDefault()
-        CarService.addNew({
-            id: cars.length + 1,
-            ...data,
-        })
-        setData(clearData)
-        setCars([...cars, data])
+        try {
+            const newCar = await CarService.addNew({
+                id: cars.length + 1,
+                ...data,
+            })
+            setCars([...cars, newCar]);
+            setData(clearData);
+        } catch (error) {
+            alert("Не получилось добавить автомобиль. Обновите страницу или попробуйте позже.")
+        }
     }
 
     return (

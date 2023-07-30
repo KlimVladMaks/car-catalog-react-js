@@ -27,14 +27,43 @@ export const CarService = {
     /**
      * Функция для добавления нового автомобиля на сервер.
      * @param {Object} carData - Объект с данными о новом автомобиле.
-     * @returns {void}
+     * @returns {Object} - Данные добавленного автомобиля.
      */
-    async addNew(carData) {
-        await axios.post('http://localhost:3000/cars', carData)
+    async addNew(carData, maxAttempts = 3, delay = 1000) {
+        let attempts = 0;
+        while (attempts < maxAttempts) {
+            try {
+                await axios.post('http://localhost:3000/cars', carData)
+                return carData;
+            } catch (error) {
+                attempts++;
+                if (attempts === maxAttempts) {
+                    throw error;
+                }
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
     },
 
-    //TODO
-    async delById(id) {
-        await axios.delete(`http://localhost:3000/cars/${id}`);
-    }
+    /**
+     * Функция для удаления автомобиля из базы данных по его id.
+     * @param {number} id - id автомобиля, который нужно удалить.
+     * @param {number} maxAttempts - Максимальное количество попыток отправки запроса на удаление на сервер.
+     * @param {number} delay - Задержка между попытками.
+     */
+    async delById(id, maxAttempts = 3, delay = 1000) {
+        let attempts = 0;
+        while (attempts < maxAttempts) {
+            try {
+                await axios.delete(`http://localhost:3000/cars/${id}`);
+                return;
+            } catch (error) {
+                attempts++;
+                if (attempts === maxAttempts) {
+                    throw error;
+                }
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+    },
 }
