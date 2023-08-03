@@ -3,6 +3,7 @@
     flex-direction: column;
     max-width: 500px;
     margin: 20px 0 30px;
+    position: relative;
 }
 
 .form input {
@@ -15,4 +16,23 @@
 
 .form input:focus {
     border-color: lightblue;
+}
+
+.form select {
+    padding: 6px;
+    margin-left: 5px;
+    background-color: lightgray;
+}
+
+.priceContainer {
+    display: flex;
+}
+
+.priceInput {
+    flex-grow: 1;
+}
+
+.priceSelect {
+    flex-shrink: 0;
+    max-height: 30px;
 }

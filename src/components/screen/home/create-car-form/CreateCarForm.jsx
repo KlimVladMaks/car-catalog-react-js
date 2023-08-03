@@ -8,7 +8,10 @@ const clearData = {
     name: '',
     price: '',
     image: '',
+    currency: '₽',
 }
+
+const currencyOptions = ['₽', '$', '€', '¥']
 
 /**
  * Функциональный компонент для создания формы для добавления нового автомобиля.
@@ -23,7 +26,7 @@ const CreateCarForm = ({cars, setCars}) => {
     /**
      * Функция для получения наибольшего id автомобиля из заданного массива.
      * @param {Array} cars - Массив автомобилей.
-     * @returns - Наибольший id автомобиля из заданного массива.
+     * @returns {number} Наибольший id автомобиля из заданного массива.
      */
     function getMaxId(cars) {
         return cars.reduce((max, car) => {
@@ -50,20 +53,57 @@ const CreateCarForm = ({cars, setCars}) => {
         }
     }
 
+    /**
+     * Функция для обновления значения изменённого параметра данных автомобиля. 
+     * @param {Event} e - Событие изменения значения параметра данных автомобиля.
+     * @returns {void}
+     */
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setData({ ...data, [name]: value });
+    };
+
+    /**
+     * Функция для обновления значения валюты цены автомобиля.
+     * @param {Event} e - Событие изменения валюты цены автомобиля (выбор валюты в раскрывающемся списке).
+     * @return {void}
+     */
+    const handleCurrencyChange = (e) => {
+        setData({ ...data, currency: e.target.value });
+    };
+
     return (
         <form className={styles.form}>
+
             <input placeholder="Название автомобиля" 
-                   onChange={e => setData({...data, name: e.target.value})} 
+                   name='name' 
+                   onChange={handleInputChange} 
                    value={data.name} />
-            <input placeholder="Цена автомобиля"
-                   onChange={e => setData({...data, price: e.target.value})} 
-                   value={data.price} />
+
+            <div className={styles.priceContainer}>
+                <input placeholder="Цена автомобиля"
+                    className={styles.priceInput}
+                    name='price'
+                    onChange={handleInputChange} 
+                    value={data.price} />
+
+                <select className={styles.priceSelect} value={data.currency} onChange={handleCurrencyChange}>
+                    {currencyOptions.map((currency) => (
+                        <option key={currency} value={currency}>
+                            {currency}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
             <input placeholder="Изображение автомобиля"
-                   onChange={e => setData({...data, image: e.target.value})}
+                   name='image'
+                   onChange={handleInputChange}
                    value={data.image} />
             <button className="button" onClick={e => createCar(e)}>Добавить</button>
+
         </form>
-    )    
+    )
 }
 
 export default CreateCarForm

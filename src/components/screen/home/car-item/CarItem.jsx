@@ -19,7 +19,7 @@ function CarItem({car, cars, setCars}) {
                 }}/>
             <div className={styles.info}>
                 <h2>{car.name}</h2>
-                <Price price={car.price}/>
+                <Price price={car.price} currencyType={car.currency}/>
                 <Buttons car={car} cars={cars} setCars={setCars}/>
             </div>
         </div>
