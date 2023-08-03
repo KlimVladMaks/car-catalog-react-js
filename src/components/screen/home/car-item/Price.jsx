@@ -18,13 +18,15 @@ const currencyTypes = {
  */
 const Price = ({price, currencyType}) => {
 
+    const priceWithoutSpaces = price.replace(/\s+/g, '');
+
     return (
         <p>
         {new Intl.NumberFormat('ru-RU', {
             style: 'currency',
             currency: currencyTypes[currencyType],
             maximumFractionDigits: 0,
-        }).format(price)}
+        }).format(priceWithoutSpaces)}
         </p>
     )
 }

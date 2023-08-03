@@ -28,7 +28,7 @@ const CreateCarForm = ({cars, setCars}) => {
      * @param {Array} cars - Массив автомобилей.
      * @returns {number} Наибольший id автомобиля из заданного массива.
      */
-    function getMaxId(cars) {
+    const getMaxId = (cars) => {
         return cars.reduce((max, car) => {
             return car.id > max ? car.id : max;
         }, 0);
