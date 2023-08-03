@@ -21,6 +21,17 @@ const CreateCarForm = ({cars, setCars}) => {
     const [data, setData] = useState(clearData)
 
     /**
+     * Функция для получения наибольшего id автомобиля из заданного массива.
+     * @param {Array} cars - Массив автомобилей.
+     * @returns - Наибольший id автомобиля из заданного массива.
+     */
+    function getMaxId(cars) {
+        return cars.reduce((max, car) => {
+            return car.id > max ? car.id : max;
+        }, 0);
+    }
+
+    /**
      * Функция для создания нового автомобиля и добавления его в базу данных.
      * @param {Event} e - Событие создания нового автомобиля (клик по кнопке "Добавить").
      * @returns {void}
@@ -29,7 +40,7 @@ const CreateCarForm = ({cars, setCars}) => {
         e.preventDefault()
         try {
             const newCar = await CarService.addNew({
-                id: cars.length + 1,
+                id: getMaxId(cars) + 1,
                 ...data,
             })
             setCars([...cars, newCar]);
