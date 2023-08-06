@@ -18,21 +18,25 @@
     border-color: lightblue;
 }
 
+.form input.input-error {
+    border-color: red;
+}
+
 .form select {
     padding: 6px;
     margin-left: 5px;
     background-color: lightgray;
 }
 
-.priceContainer {
+.price-container {
     display: flex;
 }
 
-.priceInput {
+.price-input {
     flex-grow: 1;
 }
 
-.priceSelect {
+.price-select {
     flex-shrink: 0;
     max-height: 30px;
 }

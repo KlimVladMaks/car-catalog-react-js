@@ -29,7 +29,3 @@
     justify-content: space-between;
     align-items: center;
 }
-
-.delButton:hover {
-    background-color: lightcoral;
-}

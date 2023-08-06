@@ -22,6 +22,8 @@ const currencyOptions = ['₽', '$', '€', '¥']
 const CreateCarForm = ({cars, setCars}) => {
 
     const [data, setData] = useState(clearData)
+    const [isNameValid, setIsNameValid] = useState(false);
+    const [isNameUsed, setIsNameUsed] = useState(false);
 
     /**
      * Функция для получения наибольшего id автомобиля из заданного массива.
@@ -36,58 +38,79 @@ const CreateCarForm = ({cars, setCars}) => {
 
     /**
      * Функция для создания нового автомобиля и добавления его в базу данных.
-     * @param {Event} e - Событие создания нового автомобиля (клик по кнопке "Добавить").
+     * @param {Event} event - Событие создания нового автомобиля (клик по кнопке "Добавить").
      * @returns {void}
      */
-    const createCar = async (e) => {
-        e.preventDefault()
-        try {
-            const newCar = await CarService.addNew({
-                id: getMaxId(cars) + 1,
-                ...data,
-            })
-            setCars([...cars, newCar]);
-            setData(clearData);
-        } catch (error) {
-            alert("Не получилось добавить автомобиль. Обновите страницу или попробуйте позже.")
+    const createCar = async (event) => {
+        event.preventDefault()
+        if (isNameValid) {
+            try {
+                const newCar = await CarService.addNew({
+                    id: getMaxId(cars) + 1,
+                    ...data,
+                })
+                setCars([...cars, newCar]);
+                setData(clearData);
+                setIsNameValid(false);
+                setIsNameUsed(false);
+            } catch (error) {
+                alert("Не получилось добавить автомобиль. Обновите страницу или попробуйте позже.")
+            }
+        } else {
+            setIsNameUsed(true);
         }
     }
 
     /**
-     * Функция для обновления значения изменённого параметра данных автомобиля. 
-     * @param {Event} e - Событие изменения значения параметра данных автомобиля.
+     * Функция для отслеживания ввода значения какого-либо параметра данных автомобиля. 
+     * @param {Event} event - Событие изменения значения параметра данных автомобиля.
      * @returns {void}
      */
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
         setData({ ...data, [name]: value });
     };
 
     /**
-     * Функция для обновления значения валюты цены автомобиля.
-     * @param {Event} e - Событие изменения валюты цены автомобиля (выбор валюты в раскрывающемся списке).
+     * Функция для отслеживания ввода значения валюты цены автомобиля.
+     * @param {Event} event - Событие изменения валюты цены автомобиля (выбор валюты в раскрывающемся списке).
      * @return {void}
      */
-    const handleCurrencyChange = (e) => {
-        setData({ ...data, currency: e.target.value });
+    const handleCurrencyChange = (event) => {
+        setData({ ...data, currency: event.target.value });
     };
+
+    /**
+     * Функция для отслеживания ввода значения имени автомобиля.
+     * @param {Event} event - Событие изменения имени автомобиля.
+     * @returns {void}
+     */
+    const handleNameInputChange = (event) => {
+        const {value} = event.target
+        setIsNameValid(value.trim() !== '');
+        setIsNameUsed(true);
+        handleInputChange(event);
+    }
 
     return (
         <form className={styles.form}>
 
             <input placeholder="Название автомобиля" 
-                   name='name' 
-                   onChange={handleInputChange} 
-                   value={data.name} />
+                   name='name'
+                   onChange={handleNameInputChange} 
+                   value={data.name}
+                   className={isNameUsed && !isNameValid ? styles['input-error'] : ''} />
 
-            <div className={styles.priceContainer}>
+            <div className={styles['price-container']}>
                 <input placeholder="Цена автомобиля"
-                    className={styles.priceInput}
+                    className={styles['price-input']}
                     name='price'
                     onChange={handleInputChange} 
                     value={data.price} />
 
-                <select className={styles.priceSelect} value={data.currency} onChange={handleCurrencyChange}>
+                <select className={styles['price-select']} 
+                        value={data.currency} 
+                        onChange={handleCurrencyChange}>
                     {currencyOptions.map((currency) => (
                         <option key={currency} value={currency}>
                             {currency}
