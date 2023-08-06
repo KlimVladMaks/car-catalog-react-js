@@ -20,6 +20,7 @@
 
 .form input.input-error {
     border-color: red;
+    margin-bottom: 0;
 }
 
 .form select {
@@ -39,4 +40,17 @@
 .price-select {
     flex-shrink: 0;
     max-height: 30px;
+}
+
+.error-message {
+    display: block;
+    color: red;
+    font-size: 13px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+}
+
+.mandatory-label {
+    font-size: 11px;
+    margin-bottom: 2px;
 }

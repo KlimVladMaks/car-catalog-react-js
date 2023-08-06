@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from 'react'
+import classNames from 'classnames'
 import styles from './CreateCarForm.module.css'
 import { CarService } from '../../../../services/car.service'
 
@@ -24,6 +25,8 @@ const CreateCarForm = ({cars, setCars}) => {
     const [data, setData] = useState(clearData)
     const [isNameValid, setIsNameValid] = useState(false);
     const [isNameUsed, setIsNameUsed] = useState(false);
+    const [isPriceValid, setIsPriceValid] = useState(true);
+    const [isPriceUsed, setIsPriceUsed] = useState(false);
 
     /**
      * Функция для получения наибольшего id автомобиля из заданного массива.
@@ -43,7 +46,7 @@ const CreateCarForm = ({cars, setCars}) => {
      */
     const createCar = async (event) => {
         event.preventDefault()
-        if (isNameValid) {
+        if (isNameValid && isPriceValid) {
             try {
                 const newCar = await CarService.addNew({
                     id: getMaxId(cars) + 1,
@@ -53,11 +56,14 @@ const CreateCarForm = ({cars, setCars}) => {
                 setData(clearData);
                 setIsNameValid(false);
                 setIsNameUsed(false);
+                setIsPriceValid(true);
+                setIsPriceUsed(false);
             } catch (error) {
                 alert("Не получилось добавить автомобиль. Обновите страницу или попробуйте позже.")
             }
         } else {
             setIsNameUsed(true);
+            setIsPriceUsed(true);
         }
     }
 
@@ -67,7 +73,8 @@ const CreateCarForm = ({cars, setCars}) => {
      * @returns {void}
      */
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        let { name, value } = event.target;
+        if (value.trim() === '') value = '';
         setData({ ...data, [name]: value });
     };
 
@@ -81,6 +88,18 @@ const CreateCarForm = ({cars, setCars}) => {
     };
 
     /**
+     * Функция для отслеживания ввода значения цены автомобиля.
+     * @param {Event} event - Событие изменения цены автомобиля.
+     */
+    const handlePriceInputChange = (event) => {
+        const value = event.target.value;
+        const valueWithoutSpaces = value.replace(/\s/g, '');
+        setIsPriceValid(+valueWithoutSpaces || value.trim() === '');
+        setIsPriceUsed(true);
+        handleInputChange(event);
+    }
+
+    /**
      * Функция для отслеживания ввода значения имени автомобиля.
      * @param {Event} event - Событие изменения имени автомобиля.
      * @returns {void}
@@ -92,21 +111,39 @@ const CreateCarForm = ({cars, setCars}) => {
         handleInputChange(event);
     }
 
+    const priceInputClasses = classNames(
+        styles['price-input'],
+        {
+            [styles['input-error']]: isPriceUsed && !isPriceValid && data.price.trim() !== ''
+        }
+    )
+
     return (
         <form className={styles.form}>
+
+            <label htmlFor="name-input" className={styles['mandatory-label']}>
+                *Обязательное поле
+            </label>
 
             <input placeholder="Название автомобиля" 
                    name='name'
                    onChange={handleNameInputChange} 
                    value={data.name}
-                   className={isNameUsed && !isNameValid ? styles['input-error'] : ''} />
+                   className={isNameUsed && !isNameValid ? styles['input-error'] : ''}
+                   id='name-input' />
+            
+            <label htmlFor='name-input'>
+                {(isNameUsed && !isNameValid) && 
+                <span className={styles['error-message']}>*Поле с названием автомобиля не может быть пустым</span>}
+            </label>
 
             <div className={styles['price-container']}>
                 <input placeholder="Цена автомобиля"
-                    className={styles['price-input']}
+                    className={priceInputClasses}
                     name='price'
-                    onChange={handleInputChange} 
-                    value={data.price} />
+                    onChange={handlePriceInputChange} 
+                    value={data.price}
+                    id='price-input' />
 
                 <select className={styles['price-select']} 
                         value={data.currency} 
@@ -119,10 +156,16 @@ const CreateCarForm = ({cars, setCars}) => {
                 </select>
             </div>
 
+            <label htmlFor='price-input'>
+                {(isPriceUsed && !isPriceValid && data.price.trim() !== '') && 
+                <span className={styles['error-message']}>*Поле с ценой автомобиля должно содержать только цифры</span>}
+            </label>
+
             <input placeholder="Изображение автомобиля"
                    name='image'
                    onChange={handleInputChange}
                    value={data.image} />
+
             <button className="button" onClick={e => createCar(e)}>Добавить</button>
 
         </form>
