@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import React from 'react'
+import Helmet from 'react-helmet'
 import CarItem from './car-item/CarItem'
 import CreateCarForm from './create-car-form/CreateCarForm'
 import styles from './Home.module.css'
@@ -11,6 +13,11 @@ import { CarService } from '../../../services/car.service'
 function Home() {
 
   const [cars, setCars] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const MemoizedCreateCarForm = React.memo(CreateCarForm);
+  const MemoizedCarItem = React.memo(CarItem);
 
   /**
    * Хук для обновления массива автомобилей при монтировании компонента.
@@ -22,8 +29,14 @@ function Home() {
      * @returns {void}
      */
     const fetchData = async () => {
-      const data = await CarService.getAll()
-      setCars(data)
+      try {
+        const data = await CarService.getAll();
+        setCars(data);
+      } catch {
+        setError("Не удалось получить данные об автомобилях.\nОбновите страницу или попробуйте позже.");
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchData();
@@ -31,11 +44,18 @@ function Home() {
 
   return (
     <div>
+      <Helmet>
+            <title>Каталог автомобилей</title>
+      </Helmet>
       <h1>Каталог автомобилей</h1>
-      <CreateCarForm cars={cars} setCars={setCars} />
+      <MemoizedCreateCarForm cars={cars} setCars={setCars} />
       <div>
-        {cars.length ? [...cars].reverse().map(car =>
-          (<CarItem key={car.id} car={car} cars={cars} setCars={setCars} />)
+        {isLoading ? (
+          <p className={styles.text}>Загрузка...</p>
+        ) : error ? (
+          <p><pre className={styles.text}>{error}</pre></p>
+        ) : cars.length ? [...cars].reverse().map(car =>
+          (<MemoizedCarItem key={car.id} car={car} cars={cars} setCars={setCars} />)
         )
           : (<p className={styles.text}>Автомобилей пока нет</p>)
         }
