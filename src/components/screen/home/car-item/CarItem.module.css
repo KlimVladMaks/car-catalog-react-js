@@ -23,9 +23,3 @@
 .info p {
     margin-bottom: 15px;
 }
-
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}

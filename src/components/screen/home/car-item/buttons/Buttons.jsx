@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
 import { Link } from "react-router-dom"
-import styles from "./CarItem.module.css"
-import { CarService } from "../../../../services/car.service";
+import styles from "./Buttons.module.css"
+import { CarService } from "../../../../../services/car.service";
 
 /**
  * Функциональный компонент для отображения блока с кнопками у карточки автомобиля.

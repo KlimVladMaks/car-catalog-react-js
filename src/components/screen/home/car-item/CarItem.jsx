@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
-import Buttons from "./Buttons"
+import Buttons from "./buttons/Buttons"
 import styles from "./CarItem.module.css"
-import Price from "./Price"
+import Price from "./price/Price"
 
 /**
  * Функциональный компонент для отображения карточки отдельного автомобиля.
