@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.text {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.select-list {
+    margin-left: 10px;
+    padding: 5px 3px;
+    background-color: lightgray;
+}
+
+.select-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    padding: 0;
+}
+
+.select-button-img {
+    width: 30px;
+    height: 30px;
+}

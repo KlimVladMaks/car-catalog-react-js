@@ -29,7 +29,7 @@ const Buttons = ({car, cars, setCars}) => {
         <div className={styles.buttons}>
             <Link className="button one-line" to={`/car/${car.id}`}>Узнать больше</Link>
             <button className='button del-button' onClick={delCar} style={{padding: '1px'}}>
-                <img src="/waste-basket.svg" alt="Waste basket" style={{height: '30px'}} />
+                <img src="/img/buttons/waste-basket.svg" alt="Waste basket" style={{height: '30px'}} />
             </button>
         </div>
     )

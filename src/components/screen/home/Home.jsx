@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Helmet from 'react-helmet'
 import CreateCarForm from './create-car-form/CreateCarForm'
 import CarList from './car-list/CarList'
+import CarSortBox from './car-sort-box/CarSortBox'
 
 /**
  * Функциональный компонент для отображения домашней страницы с каталогом автомобилей.
@@ -9,7 +10,7 @@ import CarList from './car-list/CarList'
  */
 function Home() {
 
-  const [cars, setCars] = useState([])
+  const [cars, setCars] = useState([]);
 
   return (
     <div>
@@ -18,6 +19,7 @@ function Home() {
       </Helmet>
       <h1>Каталог автомобилей</h1>
       <CreateCarForm cars={cars} setCars={setCars} />
+      <CarSortBox cars={cars} setCars={setCars} />
       <CarList cars={cars} setCars={setCars} />
     </div>
   )
