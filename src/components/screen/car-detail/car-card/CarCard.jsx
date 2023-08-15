@@ -9,11 +9,15 @@ import Price from "../../../../ui/price/Price"
  * @returns {JSX.Element} - Карточка автомобиля.
  */
 const CarCard = ({car}) => {
+
+    const defaultCarImage = "../../../../../public/img/unknowns/unknown-car.png";
+    const carImage = car.image || defaultCarImage
+
     return (
         <div key={car.id} className={styles.item}>
             <div className={styles.image}
                 style={{
-                    backgroundImage: `url(${car.image})`
+                    backgroundImage: `url(${carImage})`
                 }}/>
             <div className={styles.info}>
                 <h2>{car.name}</h2>
