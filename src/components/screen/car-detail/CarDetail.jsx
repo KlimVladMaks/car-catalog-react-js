@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import { Link, useParams } from "react-router-dom"
 import { CarService } from "../../../services/car.service"
-import CarItem from "../home/car-item/CarItem"
 import styles from "./CarDetail.module.css"
+import CarCard from "./car-card/CarCard"
 
 /**
  * Функциональный компонент для отображения страницы с детальной информацией об автомобиле.
@@ -59,7 +59,7 @@ const CarDetail = () => {
         } else if (!car.name) {
             return <p>Автомобиль не найден</p>;
         } else {
-            return <CarItem car={car} />;
+            return <CarCard car={car} />;
         }
     }
 
@@ -69,7 +69,7 @@ const CarDetail = () => {
             <title>Страница автомобиля</title>
         </Helmet>
         <Link to='/'>
-            <img src="/back-arrow.svg" alt="Back" className={styles.backArrow} />
+            <img src="/img/buttons/back-arrow.svg" alt="Back" className={styles.backArrow} />
         </Link>
         {renderContent()}
     </div>

@@ -10,6 +10,7 @@ const clearData = {
     price: '',
     image: '',
     currency: '₽',
+    link: '',
 }
 
 const currencyOptions = ['₽', '$', '€', '¥']
@@ -165,6 +166,11 @@ const CreateCarForm = ({cars, setCars}) => {
                    name='image'
                    onChange={handleInputChange}
                    value={data.image} />
+            
+            <input placeholder='Ссылка на сайт автомобиля'
+                   name='link'
+                   onChange={handleInputChange}
+                   value={data.link} />
 
             <button className="button" onClick={e => createCar(e)}>Добавить</button>
 
