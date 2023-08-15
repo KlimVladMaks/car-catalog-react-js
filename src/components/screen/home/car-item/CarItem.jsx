@@ -3,6 +3,7 @@
 import Buttons from "./buttons/Buttons"
 import styles from "./CarItem.module.css"
 import Price from "../../../../ui/price/Price"
+import CarImage from "../../../../ui/car-image/CarImage"
 
 /**
  * Функциональный компонент для отображения карточки отдельного автомобиля.
@@ -10,16 +11,9 @@ import Price from "../../../../ui/price/Price"
  * @returns {JSX.Element} - Карточка автомобиля.
  */
 function CarItem({car, cars, setCars}) {
-
-    const defaultCarImage = "img/unknowns/unknown-car.png";
-    const carImage = car.image || defaultCarImage
-
     return (
         <div key={car.id} className={styles.item}>
-            <div className={styles.image}
-                style={{
-                    backgroundImage: `url(${carImage})`
-                }}/>
+            <CarImage imageLink={car.image} />
             <div className={styles.info}>
                 <h2>{car.name}</h2>
                 <Price price={car.price} currencyType={car.currency}/>
