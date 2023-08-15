@@ -22,11 +22,13 @@ const Price = ({price, currencyType}) => {
 
     return (
         <p>
-        {new Intl.NumberFormat('ru-RU', {
-            style: 'currency',
-            currency: currencyTypes[currencyType],
-            maximumFractionDigits: 0,
-        }).format(priceWithoutSpaces)}
+        { price === ""
+            ? ""
+            : new Intl.NumberFormat('ru-RU', {
+                style: 'currency',
+                currency: currencyTypes[currencyType],
+                maximumFractionDigits: 0,
+            }).format(priceWithoutSpaces)}
         </p>
     )
 }
