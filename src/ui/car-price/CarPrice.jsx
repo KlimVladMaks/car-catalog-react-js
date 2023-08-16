@@ -16,7 +16,7 @@ const currencyTypes = {
  * @param {string} currencyType - Тип валюты.
  * @returns {JSX.Element} - Блок с ценой автомобиля.
  */
-const Price = ({price, currencyType}) => {
+const CarPrice = ({price, currencyType}) => {
 
     const priceWithoutSpaces = price.replace(/\s+/g, '');
 
@@ -33,4 +33,4 @@ const Price = ({price, currencyType}) => {
     )
 }
 
-export default React.memo(Price)
+export default React.memo(CarPrice)

@@ -2,7 +2,7 @@
 
 import Buttons from "./buttons/Buttons"
 import styles from "./CarItem.module.css"
-import Price from "../../../../ui/price/Price"
+import CarPrice from "../../../../ui/car-price/CarPrice"
 import CarImage from "../../../../ui/car-image/CarImage"
 
 /**
@@ -16,7 +16,7 @@ function CarItem({car, cars, setCars}) {
             <CarImage imageLink={car.image} />
             <div className={styles.info}>
                 <h2>{car.name}</h2>
-                <Price price={car.price} currencyType={car.currency}/>
+                <CarPrice price={car.price} currencyType={car.currency}/>
                 <Buttons car={car} cars={cars} setCars={setCars}/>
             </div>
         </div>
