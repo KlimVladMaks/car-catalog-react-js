@@ -14,6 +14,8 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* BUTTON */
+
 .button {
     padding: 7px;
     border: none;
@@ -31,10 +33,14 @@ h1 {
     background-color: lightblue;
 }
 
-.button.one-line {
-    max-height: 15px;
+.button.lightcoral {
+    background-color: lightcoral;
 }
 
-.button.del-button:hover {
+.button.red-hover:hover {
+    background-color: red;
+}
+
+.button.lightcoral-hover:hover {
     background-color: lightcoral;
 }

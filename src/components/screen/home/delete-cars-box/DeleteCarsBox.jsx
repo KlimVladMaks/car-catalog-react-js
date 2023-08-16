@@ -7,7 +7,7 @@ import styles from "./DeleteCarsBox.module.css"
 const DeleteCarsBox = () => {
     return (
         <div className={styles.container}>
-            <button className="button del-button">Очистить список</button>
+            <button className="button lightcoral red-hover">Очистить список</button>
         </div>
     )
 }
