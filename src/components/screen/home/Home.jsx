@@ -20,7 +20,7 @@ function Home() {
       </Helmet>
       <h1>Каталог автомобилей</h1>
       <CreateCarForm cars={cars} setCars={setCars} />
-      <DeleteCarsBox />
+      <DeleteCarsBox setCars={setCars} />
       <CarSortBox cars={cars} setCars={setCars} />
       <CarList cars={cars} setCars={setCars} />
     </div>

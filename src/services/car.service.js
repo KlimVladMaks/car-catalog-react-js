@@ -66,4 +66,28 @@ export const CarService = {
             }
         }
     },
+
+    /**
+     * Функция для удаления всех автомобилей из базы данных.
+     * @param {number} maxAttempts - Максимальное количество попыток отправки запроса на удаление на сервер.
+     * @param {number} delay - Задержка между попытками.
+     */
+    async delAllCars(maxAttempts = 3, delay = 1000) {
+        const cars = await CarService.getAll();
+        let attempts = 0;
+        for (const car of cars) {
+            while (attempts < maxAttempts) {
+                try {
+                    await CarService.delById(car.id);
+                    break;
+                } catch (error) {
+                    attempts++;
+                    if (attempts === maxAttempts) {
+                        throw error;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+    },
 }
