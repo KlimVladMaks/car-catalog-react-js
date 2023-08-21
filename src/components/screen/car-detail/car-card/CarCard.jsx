@@ -10,10 +10,13 @@ import CarImage from "../../../../ui/car-image/CarImage"
  * @returns {JSX.Element} - Карточка автомобиля.
  */
 const CarCard = ({car}) => {
+
+    const isOnlyHeader = car.price || car.link
+
     return (
         <div key={car.id} className={styles.item}>
             <CarImage imageLink={car.image} />
-            <div className={styles.info}>
+            <div className={`${styles.info} ${isOnlyHeader || styles['only-header']}`}>
                 <h2>{car.name}</h2>
                 <CarPrice price={car.price} currencyType={car.currency}/>
                 {car.link && (
