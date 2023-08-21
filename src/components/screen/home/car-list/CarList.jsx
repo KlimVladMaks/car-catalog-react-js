@@ -19,6 +19,10 @@ const CarList = ({ cars, setCars }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const carId = searchParams.get('carId');
+
     useEffect(() => {
 
       /**
@@ -39,20 +43,14 @@ const CarList = ({ cars, setCars }) => {
       fetchData();
     }, [setCars])
 
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const carId = searchParams.get('carId');
-
     useEffect(() => {
-      if (carId && listRef.current) {
-        setTimeout(() => {
-          const carElement = listRef.current.querySelector(`#car-${carId}`);
-          if (carElement) {
+      if (!isLoading && carId && listRef.current) {
+        const carElement = listRef.current.querySelector(`#car-${carId}`);
+        if (carElement) {
             carElement.scrollIntoView();
-          }
-        }, 100);
+        }
       }
-    }, [carId, listRef]);
+    }, [isLoading, carId, listRef]);
 
     return (
         <div ref={listRef}>
