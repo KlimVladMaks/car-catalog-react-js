@@ -68,7 +68,7 @@ const CarDetail = () => {
         <Helmet>
             <title>Страница автомобиля</title>
         </Helmet>
-        <Link to='/'>
+        <Link to={`/?carId=${car.id}`}>
             <img src="/img/buttons/back-arrow.svg" alt="Back" className={styles.backArrow} />
         </Link>
         {renderContent()}

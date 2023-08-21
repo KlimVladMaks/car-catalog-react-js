@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 
 import styles from './CarList.module.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { CarService } from '../../../../services/car.service'
 import CarItem from '../car-item/CarItem'
 
@@ -13,31 +14,48 @@ import CarItem from '../car-item/CarItem'
  */
 const CarList = ({ cars, setCars }) => {
 
+    const listRef = useRef(null);
+
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
 
-        /**
-         * Функция для получения и задания данных о всех автомобилях.
-         * @returns {void}
-         */
-        const fetchData = async () => {
-          try {
-            const data = await CarService.getAll();
-            setCars(data);
-          } catch {
-            setError("Не удалось получить данные об автомобилях.\nОбновите страницу или попробуйте позже.");
-          } finally {
-            setIsLoading(false);
-          }
+      /**
+       * Функция для получения и задания данных о всех автомобилях.
+       * @returns {void}
+       */
+      const fetchData = async () => {
+        try {
+          const data = await CarService.getAll();
+          setCars(data);
+        } catch {
+          setError("Не удалось получить данные об автомобилях.\nОбновите страницу или попробуйте позже.");
+        } finally {
+          setIsLoading(false);
         }
-    
-        fetchData();
-      }, [setCars])
+      }
+  
+      fetchData();
+    }, [setCars])
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const carId = searchParams.get('carId');
+
+    useEffect(() => {
+      if (carId && listRef.current) {
+        setTimeout(() => {
+          const carElement = listRef.current.querySelector(`#car-${carId}`);
+          if (carElement) {
+            carElement.scrollIntoView();
+          }
+        }, 100);
+      }
+    }, [carId, listRef]);
 
     return (
-        <div>
+        <div ref={listRef}>
             {isLoading ? (
             <p className={styles.text}>Загрузка...</p>
             ) : error ? (
