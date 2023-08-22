@@ -2,7 +2,6 @@
 
 import styles from './CarList.module.css'
 import { useState, useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
 import { CarService } from '../../../../services/car.service'
 import CarItem from './car-item/CarItem'
 
@@ -18,10 +17,6 @@ const CarList = ({ cars, setCars }) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const carId = searchParams.get('carId');
 
     useEffect(() => {
 
@@ -44,13 +39,13 @@ const CarList = ({ cars, setCars }) => {
     }, [setCars])
 
     useEffect(() => {
-      if (!isLoading && carId && listRef.current) {
-        const carElement = listRef.current.querySelector(`#car-${carId}`);
-        if (carElement) {
-            carElement.scrollIntoView();
+      if (!isLoading && window.location.hash) {
+        const targetElement = document.querySelector(window.location.hash);
+        if (targetElement) {
+          targetElement.scrollIntoView();
         }
       }
-    }, [isLoading, carId, listRef]);
+    }, [isLoading]);
 
     return (
         <div ref={listRef}>
