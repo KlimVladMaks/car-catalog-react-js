@@ -2,8 +2,8 @@
 
 import Buttons from "./buttons/Buttons"
 import styles from "./CarItem.module.css"
-import CarPrice from "../../../../ui/car-price/CarPrice"
-import CarImage from "../../../../ui/car-image/CarImage"
+import CarPrice from "../../../../../ui/car-price/CarPrice"
+import CarImage from "../../../../../ui/car-image/CarImage"
 
 /**
  * Функциональный компонент для отображения карточки отдельного автомобиля.

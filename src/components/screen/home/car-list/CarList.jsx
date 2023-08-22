@@ -4,7 +4,7 @@ import styles from './CarList.module.css'
 import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { CarService } from '../../../../services/car.service'
-import CarItem from '../car-item/CarItem'
+import CarItem from './car-item/CarItem'
 
 /**
  * Функциональный компонент для отображения списка автомобилей.

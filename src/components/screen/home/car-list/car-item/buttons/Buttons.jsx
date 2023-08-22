@@ -2,7 +2,7 @@
 
 import { Link } from "react-router-dom"
 import styles from "./Buttons.module.css"
-import { CarService } from "../../../../../services/car.service";
+import { CarService } from "../../../../../../services/car.service";
 
 /**
  * Функциональный компонент для отображения блока с кнопками у карточки автомобиля.
