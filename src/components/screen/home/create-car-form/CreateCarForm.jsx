@@ -4,6 +4,7 @@ import { useState } from 'react'
 import classNames from 'classnames'
 import styles from './CreateCarForm.module.css'
 import { CarService } from '../../../../services/car.service'
+import NameInputField from './fields/name-input-field/NameInputField'
 
 const clearData = {
     name: '',
@@ -100,18 +101,6 @@ const CreateCarForm = ({cars, setCars}) => {
         handleInputChange(event);
     }
 
-    /**
-     * Функция для отслеживания ввода значения имени автомобиля.
-     * @param {Event} event - Событие изменения имени автомобиля.
-     * @returns {void}
-     */
-    const handleNameInputChange = (event) => {
-        const {value} = event.target
-        setIsNameValid(value.trim() !== '');
-        setIsNameUsed(true);
-        handleInputChange(event);
-    }
-
     const priceInputClasses = classNames(
         styles['price-input'],
         {
@@ -122,21 +111,12 @@ const CreateCarForm = ({cars, setCars}) => {
     return (
         <form className={styles.form}>
 
-            <label htmlFor="name-input" className={styles['mandatory-label']}>
-                *Обязательное поле
-            </label>
-
-            <input placeholder="Название автомобиля" 
-                   name='name'
-                   onChange={handleNameInputChange} 
-                   value={data.name}
-                   className={isNameUsed && !isNameValid ? styles['input-error'] : ''}
-                   id='name-input' />
-            
-            <label htmlFor='name-input'>
-                {(isNameUsed && !isNameValid) && 
-                <span className={styles['error-message']}>*Поле с названием автомобиля не может быть пустым</span>}
-            </label>
+            <NameInputField setIsNameValid={setIsNameValid}
+                            setIsNameUsed={setIsNameUsed}
+                            handleInputChange={handleInputChange}
+                            data={data}
+                            isNameUsed={isNameUsed}
+                            isNameValid={isNameValid} />
 
             <div className={styles['price-container']}>
                 <input placeholder="Цена автомобиля"
