@@ -16,11 +16,6 @@ const CarDetail = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    /**
-     * Хук, обновляющий данные об автомобиле при монтировании компонента и изменении параметра id автомобиля.
-     * @param {string} id - id автомобиля.
-     * @returns {void}
-     */
     useEffect(() => {
 
         if (!id) return

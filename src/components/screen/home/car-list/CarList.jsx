@@ -43,6 +43,7 @@ const CarList = ({ cars, setCars }) => {
         const targetElement = document.querySelector(window.location.hash);
         if (targetElement) {
           targetElement.scrollIntoView();
+          window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
         }
       }
     }, [isLoading]);
