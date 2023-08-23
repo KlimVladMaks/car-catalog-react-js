@@ -50,6 +50,9 @@ const CreateCarForm = ({cars, setCars}) => {
         event.preventDefault()
         if (isNameValid && isPriceValid) {
             try {
+                if (data.price) {
+                    data.price = Number(data.price.replace(/\s/g, ''));
+                }
                 const newCar = await CarService.addNew({
                     id: getMaxId(cars) + 1,
                     ...data,

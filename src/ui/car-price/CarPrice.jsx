@@ -18,8 +18,6 @@ const currencyTypes = {
  */
 const CarPrice = ({price, currencyType}) => {
 
-    const priceWithoutSpaces = price.replace(/\s+/g, '');
-
     return (
         <p>
         { price === ""
@@ -28,7 +26,7 @@ const CarPrice = ({price, currencyType}) => {
                 style: 'currency',
                 currency: currencyTypes[currencyType],
                 maximumFractionDigits: 0,
-            }).format(priceWithoutSpaces)}
+            }).format(price)}
         </p>
     )
 }
