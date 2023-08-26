@@ -23,16 +23,3 @@
     margin-left: 5px;
     background-color: lightgray;
 }
-
-.price-container {
-    display: flex;
-}
-
-.price-input {
-    flex-grow: 1;
-}
-
-.price-select {
-    flex-shrink: 0;
-    max-height: 30px;
-}

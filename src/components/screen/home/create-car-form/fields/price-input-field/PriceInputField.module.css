@@ -1,0 +1,12 @@
+.price-container {
+    display: flex;
+}
+
+.price-select {
+    flex-shrink: 0;
+    max-height: 30px;
+}
+
+.price-input {
+    flex-grow: 1;
+}
