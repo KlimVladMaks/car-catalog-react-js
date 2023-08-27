@@ -5,6 +5,8 @@ import styles from './CreateCarForm.module.css'
 import { CarService } from '../../../../services/car.service'
 import NameInputField from './fields/name-input-field/NameInputField'
 import PriceInputField from './fields/price-input-field/PriceInputField'
+import ImageInputField from './fields/image-input-field/ImageInputField'
+import LinkInputField from './fields/link-input-field/LinkInputField'
 
 const clearInputData = {
     name: '',
@@ -79,16 +81,12 @@ const CreateCarForm = ({cars, setCars}) => {
                              setIsPriceUsed={setIsPriceUsed}
                              isPriceValid={isPriceValid}
                              setIsPriceValid={setIsPriceValid} />
-
-            <input placeholder="Изображение автомобиля"
-                   name='image'
-                   onChange={handleInputChange}
-                   value={inputData.image} />
             
-            <input placeholder='Ссылка на сайт автомобиля'
-                   name='link'
-                   onChange={handleInputChange}
-                   value={inputData.link} />
+            <ImageInputField inputData={inputData} 
+                             handleInputChange={handleInputChange} />
+
+            <LinkInputField inputData={inputData} 
+                            handleInputChange={handleInputChange} />
 
             <button className="button" onClick={e => createCar(e)}>Добавить</button>
 
