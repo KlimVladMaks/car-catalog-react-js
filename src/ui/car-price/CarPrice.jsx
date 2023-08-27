@@ -18,6 +18,12 @@ const currencyTypes = {
  */
 const CarPrice = ({price, currencyType}) => {
 
+    let formattedPrice = price;
+    if (typeof price === 'string') {
+        formattedPrice = price.replace(/\s/g, '');
+        formattedPrice = Number(formattedPrice);
+    }
+
     return (
         <p>
         { price === ""
@@ -26,7 +32,7 @@ const CarPrice = ({price, currencyType}) => {
                 style: 'currency',
                 currency: currencyTypes[currencyType],
                 maximumFractionDigits: 0,
-            }).format(price)}
+            }).format(formattedPrice)}
         </p>
     )
 }

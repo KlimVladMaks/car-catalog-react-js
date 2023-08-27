@@ -11,12 +11,12 @@ import CarImage from "../../../../ui/car-image/CarImage"
  */
 const CarCard = ({car}) => {
 
-    const isOnlyHeader = car.price || car.link
+    const isOnlyTitle = car.price || car.link
 
     return (
         <div key={car.id} className={styles.item}>
             <CarImage imageLink={car.image} />
-            <div className={`${styles.info} ${isOnlyHeader || styles['only-header']}`}>
+            <div className={`${styles.info} ${isOnlyTitle || styles['only-title']}`}>
                 <h2>{car.name}</h2>
                 <CarPrice price={car.price} currencyType={car.currency}/>
                 {car.link && (

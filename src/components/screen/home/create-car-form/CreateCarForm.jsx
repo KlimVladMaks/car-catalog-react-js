@@ -7,6 +7,7 @@ import NameInputField from './fields/name-input-field/NameInputField'
 import PriceInputField from './fields/price-input-field/PriceInputField'
 import ImageInputField from './fields/image-input-field/ImageInputField'
 import LinkInputField from './fields/link-input-field/LinkInputField'
+import PreviewCard from './preview-card/PreviewCard'
 
 const clearInputData = {
     name: '',
@@ -65,32 +66,36 @@ const CreateCarForm = ({cars, setCars}) => {
     };
 
     return (
-        <form className={styles.form}>
+        <div>
+            <form className={styles.form}>
 
-            <NameInputField inputData={inputData}
-                            handleInputChange={handleInputChange}
-                            isNameUsed={isNameUsed}
-                            setIsNameUsed={setIsNameUsed}
-                            isNameValid={isNameValid}
-                            setIsNameValid={setIsNameValid} />
+                <NameInputField inputData={inputData}
+                                handleInputChange={handleInputChange}
+                                isNameUsed={isNameUsed}
+                                setIsNameUsed={setIsNameUsed}
+                                isNameValid={isNameValid}
+                                setIsNameValid={setIsNameValid} />
 
-            <PriceInputField inputData={inputData}
-                             setInputData={setInputData}
-                             handleInputChange={handleInputChange}
-                             isPriceUsed={isPriceUsed}
-                             setIsPriceUsed={setIsPriceUsed}
-                             isPriceValid={isPriceValid}
-                             setIsPriceValid={setIsPriceValid} />
-            
-            <ImageInputField inputData={inputData} 
-                             handleInputChange={handleInputChange} />
+                <PriceInputField inputData={inputData}
+                                 setInputData={setInputData}
+                                 handleInputChange={handleInputChange}
+                                 isPriceUsed={isPriceUsed}
+                                 setIsPriceUsed={setIsPriceUsed}
+                                 isPriceValid={isPriceValid}
+                                 setIsPriceValid={setIsPriceValid} />
+                
+                <ImageInputField inputData={inputData} 
+                                 handleInputChange={handleInputChange} />
 
-            <LinkInputField inputData={inputData} 
-                            handleInputChange={handleInputChange} />
+                <LinkInputField inputData={inputData} 
+                                handleInputChange={handleInputChange} />
 
-            <button className="button" onClick={e => createCar(e)}>Добавить</button>
+                <button className="button" onClick={e => createCar(e)}>Добавить</button>
 
-        </form>
+            </form>
+            {isNameValid && isPriceValid &&
+            <PreviewCard inputData={inputData} />}
+        </div>
     )
 }
 
