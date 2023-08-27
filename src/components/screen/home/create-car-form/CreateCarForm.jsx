@@ -63,10 +63,11 @@ const CreateCarForm = ({cars, setCars}) => {
         let { name, value } = event.target;
         if (value.trim() === '') value = '';
         setInputData({ ...inputData, [name]: value });
+        setIsNameUsed(true);
     };
 
     return (
-        <div>
+        <div className={styles['form-wrapper']}>
             <form className={styles.form}>
 
                 <NameInputField inputData={inputData}
