@@ -26,11 +26,16 @@ const Buttons = ({car, cars, setCars}) => {
     }
 
     return (
-        <div className={styles.buttons}>
+        <div className={styles["buttons"]}>
             <Link className="button" to={`/car/${car.id}`}>Узнать больше</Link>
-            <button className='button lightcoral-hover' onClick={delCar} style={{padding: '1px'}}>
-                <img src="/img/buttons/waste-basket.svg" alt="Waste basket" style={{height: '30px'}} />
-            </button>
+            <div className={styles["edit-del-buttons"]}>
+                <button className='button' style={{padding: '2px 2px 0 2px'}}>
+                    <img src="/img/buttons/edit.svg" alt="Edit" style={{height: '30px'}} />
+                </button>
+                <button className='button lightcoral-hover' onClick={delCar} style={{padding: '1px'}}>
+                    <img src="/img/buttons/waste-basket.svg" alt="Waste basket" style={{height: '30px'}} />
+                </button>
+            </div>
         </div>
     )
 }
