@@ -5,7 +5,7 @@ const LinkInputField = ({
     handleInputChange,
 }) => {
     return (
-        <input placeholder='Ссылка на сайт автомобиля'
+        <input placeholder='Сайт автомобиля'
                name='link'
                onChange={handleInputChange}
                value={inputData.link} />

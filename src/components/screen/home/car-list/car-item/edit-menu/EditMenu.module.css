@@ -1,0 +1,31 @@
+.edit-card {
+    position: absolute;
+    top: 0;
+    left: 550px;
+    border: 1px solid white;
+    width: 500px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    gap: 2px;
+}
+
+.edit-form input {
+    padding: 5px 10px;
+    outline: none;
+    border: 2px solid transparent;
+    margin-bottom: 10px;
+}
+
+.edit-form input:last-child {
+    margin-bottom: 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}

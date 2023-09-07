@@ -90,4 +90,15 @@ export const CarService = {
             }
         }
     },
+
+    /**
+     * Функция для обновления данных об автомобиле.
+     * @param {Object} newCarData - Новые данные об изменяемом автомобиле.
+     * @param {number} maxAttempts - Максимальное количество попыток отправки запроса на обновление на сервер.
+     * @param {number} delay - Задержка между попытками.
+     */
+    async updateCar(newCarData) {
+        await CarService.delById(newCarData.id);
+        await CarService.addNew(newCarData);
+    }
 }
